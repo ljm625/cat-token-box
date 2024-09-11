@@ -230,11 +230,12 @@ export async function broadcast(
       if (typeof data=='string'){
         console.log(data)
         throw new Error(data)
-      } else{
-        if(data.code===0){
-          return data.data
-      } else{
-          throw new Error(data.data)
+       } else if (typeof data === 'object' && data !== null && 'code' in data) {
+          const responseData = data as { code: number ,data: string};
+          if(responseData.code===0){
+          return responseData.data
+        } else{
+            throw new Error(responseData.data)
       }
       }
     })
