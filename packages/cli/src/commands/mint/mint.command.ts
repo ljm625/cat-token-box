@@ -270,10 +270,15 @@ export class MintCommand extends BoardcastCommand {
       this.walletService,
       address,
     );
+    console.log(address);
+    console.log("UTXOs:");
+    console.log(feeUtxos);
 
     feeUtxos = feeUtxos.filter((utxo) => {
       return this.spendService.isUnspent(utxo);
     });
+    console.log("Available UTXOs:");
+    console.log(feeUtxos);
 
     if (feeUtxos.length === 0) {
       console.warn('Insufficient satoshis balance!');
