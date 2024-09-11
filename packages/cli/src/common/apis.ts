@@ -49,8 +49,7 @@ export const getFractalUtxos = async function (
   address: btc.Address,
 ): Promise<UTXO[]> {
   const script = new btc.Script(address).toHex();
-
-  const url = `https://open-api-fractal-testnet.unisat.io/v1/indexer/address/${address}/utxo-data?cursor=0&size=16`;
+  const url = `https://mempool.fractalbitcoin.io/api/address/${address}/utxo`;
   const utxos: Array<any> = await fetch(
     url,
     config.withProxy({
@@ -202,9 +201,9 @@ export async function broadcast(
   wallet: WalletService,
   txHex: string,
 ): Promise<string | Error> {
-  if (config.useRpc()) {
-    return rpc_broadcast(config, wallet.getWalletName(), txHex);
-  }
+  // if (config.useRpc()) {
+  //   return rpc_broadcast(config, wallet.getWalletName(), txHex);
+  // }
 
   const url = `${config.getApiHost()}/api/tx`;
   return fetch(
