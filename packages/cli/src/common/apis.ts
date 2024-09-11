@@ -227,8 +227,8 @@ export async function broadcast(
       }
     })
     .then(async (data) => {
+      console.log(data)
       if (typeof data=='string'){
-        console.log(data)
         throw new Error(data)
        } else if (typeof data === 'object' && data !== null && 'code' in data) {
           const responseData = data as { code: number ,data: string};
@@ -240,6 +240,7 @@ export async function broadcast(
       }
     })
     .catch((e) => {
+      console.log(e)
       logerror('broadcast failed!', e);
       return e;
     });
