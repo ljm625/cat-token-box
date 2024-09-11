@@ -227,12 +227,15 @@ export async function broadcast(
       }
     })
     .then(async (data) => {
-      if (typeof data === 'string' && data.length === 64) {
-        return data;
-      } else if (typeof data === 'object') {
-        throw new Error(JSON.stringify(data));
-      } else if (typeof data === 'string') {
-        throw new Error(data);
+      if (typeof data=='string'){
+        console.log(data)
+        throw new Error(data)
+      } else{
+        if(data.code===0){
+          return data.data
+      } else{
+          throw new Error(data.data)
+      }
       }
     })
     .catch((e) => {
