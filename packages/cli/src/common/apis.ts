@@ -211,7 +211,7 @@ export async function broadcast(
     url,
     config.withProxy({
       method: 'POST',
-      body: txHex,
+      body: {"rawtx":txHex},
     }),
   )
     .then(async (res) => {
