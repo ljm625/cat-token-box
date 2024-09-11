@@ -205,12 +205,12 @@ export async function broadcast(
   //   return rpc_broadcast(config, wallet.getWalletName(), txHex);
   // }
 
-  const url = `${config.getApiHost()}/api/tx`;
+  const url = `https://wallet-api-fractal.unisat.io/v5/tx/broadcast`;
   return fetch(
     url,
     config.withProxy({
       method: 'POST',
-      body: txHex,
+      body: {"rawtx":txHex},
     }),
   )
     .then(async (res) => {
