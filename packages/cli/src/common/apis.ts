@@ -210,7 +210,11 @@ export async function broadcast(
     url,
     config.withProxy({
       method: 'POST',
-      body: {"rawtx":txHex},
+      headers: {
+        'Content-Type': 'application/json',
+        'x-address': wallet.getAddress(),
+      },
+      body: JSON.stringify({"rawtx":txHex}),
     }),
   )
     .then(async (res) => {
