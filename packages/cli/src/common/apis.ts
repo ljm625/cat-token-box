@@ -234,7 +234,8 @@ export async function broadcast(
           if(responseData.code===0){
           return responseData.data
         } else{
-            throw new Error(responseData.data)
+          const responseData = data as { code: number ,msg: string};
+            throw new Error(responseData.msg)
       }
       }
     })
