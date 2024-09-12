@@ -201,9 +201,9 @@ export async function broadcast(
   wallet: WalletService,
   txHex: string,
 ): Promise<string | Error> {
-  // if (config.useRpc()) {
-  //   return rpc_broadcast(config, wallet.getWalletName(), txHex);
-  // }
+  if (config.useRpc()) {
+    return rpc_broadcast(config, wallet.getWalletName(), txHex);
+  }
 
   const url = `https://wallet-api-fractal.unisat.io/v5/tx/broadcast`;
   return fetch(
