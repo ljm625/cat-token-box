@@ -49,12 +49,8 @@ export const getFractalUtxos = async function (
   address: btc.Address,
 ): Promise<UTXO[]> {
   const script = new btc.Script(address).toHex();
-<<<<<<< HEAD
-  const url = `https://mempool.fractalbitcoin.io/api/address/${address}/utxo`;
-=======
 
   const url = `${config.getOpenApiHost()}/v1/indexer/address/${address}/utxo-data?cursor=0&size=16`;
->>>>>>> orig/main
   const utxos: Array<any> = await fetch(
     url,
     config.withProxy({
