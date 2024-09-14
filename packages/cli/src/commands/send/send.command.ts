@@ -184,51 +184,52 @@ export class SendCommand extends BoardcastCommand {
       tokenContracts = mergedTokens;
       feeUtxos = newfeeUtxos;
     }
+    console.log("Skip send since this branch only merge")
 
-    const feeUtxo = pickLargeFeeUtxo(feeUtxos);
+    // const feeUtxo = pickLargeFeeUtxo(feeUtxos);
 
-    const result = await sendToken(
-      this.configService,
-      this.walletService,
-      feeUtxo,
-      feeRate,
-      token,
-      tokenContracts,
-      address,
-      receiver,
-      amount,
-      cachedTxs,
-    );
+    // const result = await sendToken(
+    //   this.configService,
+    //   this.walletService,
+    //   feeUtxo,
+    //   feeRate,
+    //   token,
+    //   tokenContracts,
+    //   address,
+    //   receiver,
+    //   amount,
+    //   cachedTxs,
+    // );
 
-    if (result) {
-      const commitTxId = await broadcast(
-        this.configService,
-        this.walletService,
-        result.commitTx.uncheckedSerialize(),
-      );
+    // if (result) {
+    //   const commitTxId = await broadcast(
+    //     this.configService,
+    //     this.walletService,
+    //     result.commitTx.uncheckedSerialize(),
+    //   );
 
-      if (commitTxId instanceof Error) {
-        throw commitTxId;
-      }
+    //   if (commitTxId instanceof Error) {
+    //     throw commitTxId;
+    //   }
 
-      this.spendService.updateSpends(result.commitTx);
+    //   this.spendService.updateSpends(result.commitTx);
 
-      const revealTxId = await broadcast(
-        this.configService,
-        this.walletService,
-        result.revealTx.uncheckedSerialize(),
-      );
+    //   const revealTxId = await broadcast(
+    //     this.configService,
+    //     this.walletService,
+    //     result.revealTx.uncheckedSerialize(),
+    //   );
 
-      if (revealTxId instanceof Error) {
-        throw revealTxId;
-      }
+    //   if (revealTxId instanceof Error) {
+    //     throw revealTxId;
+    //   }
 
-      this.spendService.updateSpends(result.revealTx);
+    //   this.spendService.updateSpends(result.revealTx);
 
-      console.log(
-        `Sending ${unScaleByDecimals(amount, token.info.decimals)} ${token.info.symbol} tokens to ${receiver} \nin txid: ${result.revealTx.id}`,
-      );
-    }
+    //   console.log(
+    //     `Sending ${unScaleByDecimals(amount, token.info.decimals)} ${token.info.symbol} tokens to ${receiver} \nin txid: ${result.revealTx.id}`,
+    //   );
+    // }
   }
 
   @Option({
